@@ -91,4 +91,3 @@ theme: landscape
 deploy:
   type: git
   repo: git@github.com:GreyGao/greygao-blog.git
-  branch: release
