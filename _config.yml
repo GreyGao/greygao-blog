@@ -13,8 +13,8 @@ timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com/greygao-blog
-root: /
+url: https://greygao.github.io/greygao-blog/
+root: /greygao-blog/
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
@@ -91,4 +91,6 @@ theme: landscape
 deploy:
   type: git
   repo: git@github.com:GreyGao/greygao-blog.git
+  ignore_hidden: true
+  ignore_pattern: regexp
 #  branch: master
