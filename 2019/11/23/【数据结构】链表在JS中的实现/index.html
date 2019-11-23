@@ -50,28 +50,31 @@
   };
 </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="https:&#x2F;&#x2F;greygao.github.io&#x2F;greygao-blog&#x2F;index.html">
+  <meta name="description" content="【数据结构】链表在JS中的实现目标使用JavaScript实现一个链表，支持以下方法：  链表的插入、删除 根据index查询节点 根据给定的value查询节点 单链表反转 链表中环的检测 删除链表倒数第n个结点*  实现12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【数据结构】链表在JS中的实现">
+<meta property="og:url" content="https:&#x2F;&#x2F;greygao.github.io&#x2F;greygao-blog&#x2F;2019&#x2F;11&#x2F;23&#x2F;%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E9%93%BE%E8%A1%A8%E5%9C%A8JS%E4%B8%AD%E7%9A%84%E5%AE%9E%E7%8E%B0&#x2F;index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="【数据结构】链表在JS中的实现目标使用JavaScript实现一个链表，支持以下方法：  链表的插入、删除 根据index查询节点 根据给定的value查询节点 单链表反转 链表中环的检测 删除链表倒数第n个结点*  实现12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849">
 <meta property="og:locale" content="zh">
+<meta property="og:updated_time" content="2019-11-23T14:59:20.379Z">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://greygao.github.io/greygao-blog/">
+<link rel="canonical" href="https://greygao.github.io/greygao-blog/2019/11/23/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E9%93%BE%E8%A1%A8%E5%9C%A8JS%E4%B8%AD%E7%9A%84%E5%AE%9E%E7%8E%B0/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome: true,
-    isPost: false,
+    isHome: false,
+    isPost: true,
     isPage: false,
     isArchive: false
   };
 </script>
 
-  <title>Hexo</title>
+  <title>【数据结构】链表在JS中的实现 | Hexo</title>
   
 
 
@@ -168,10 +171,10 @@
             
 
   <div class="posts-expand">
-        
+      
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh">
     <link itemprop="mainEntityOfPage" href="https://greygao.github.io/greygao-blog/greygao-blog/2019/11/23/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E9%93%BE%E8%A1%A8%E5%9C%A8JS%E4%B8%AD%E7%9A%84%E5%AE%9E%E7%8E%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -185,8 +188,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/greygao-blog/2019/11/23/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E9%93%BE%E8%A1%A8%E5%9C%A8JS%E4%B8%AD%E7%9A%84%E5%AE%9E%E7%8E%B0/" class="post-title-link" itemprop="url">【数据结构】链表在JS中的实现</a>
+          【数据结构】链表在JS中的实现
         </h1>
 
         <div class="post-meta">
@@ -211,7 +213,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="【数据结构】链表在JS中的实现"><a href="#【数据结构】链表在JS中的实现" class="headerlink" title="【数据结构】链表在JS中的实现"></a>【数据结构】链表在JS中的实现</h1><h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>使用JavaScript实现一个链表，支持以下方法：</p>
+        <h1 id="【数据结构】链表在JS中的实现"><a href="#【数据结构】链表在JS中的实现" class="headerlink" title="【数据结构】链表在JS中的实现"></a>【数据结构】链表在JS中的实现</h1><h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>使用JavaScript实现一个链表，支持以下方法：</p>
 <ol>
 <li>链表的插入、删除</li>
 <li>根据index查询节点</li>
@@ -222,237 +224,36 @@
 </ol>
 <h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(element) &#123;</span><br><span class="line">    <span class="keyword">this</span>.element = element;</span><br><span class="line">    <span class="keyword">this</span>.next = <span class="literal">null</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LinkedList</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>() &#123;</span><br><span class="line">    <span class="keyword">this</span>.head = <span class="keyword">new</span> Node(<span class="string">'head'</span>)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 根据value查找节点</span></span><br><span class="line">  findByValue(value) &#123;</span><br><span class="line">    <span class="keyword">let</span> currentNode = <span class="keyword">this</span>.head;</span><br><span class="line">    <span class="keyword">while</span> (currentNode !== <span class="literal">null</span> &amp;&amp; currentNode.element !== value) &#123;</span><br><span class="line">      currentNode = currentNode.next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> currentNode === <span class="literal">null</span> ? <span class="number">-1</span> : currentNode;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 根据index查找节点</span></span><br><span class="line">  findByIndex(index) &#123;</span><br><span class="line">    <span class="keyword">let</span> currentNode = <span class="keyword">this</span>.head;</span><br><span class="line">    <span class="keyword">let</span> pos = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (currentNode !== <span class="literal">null</span> &amp;&amp; pos !== index) &#123;</span><br><span class="line">      currentNode = currentNode.next;</span><br><span class="line">      pos++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> currentNode === <span class="literal">null</span> ? <span class="number">-1</span> : currentNode;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 根据值查找前一个</span></span><br><span class="line">  findPrev(value) &#123;</span><br><span class="line">    <span class="keyword">let</span> currentNode = <span class="keyword">this</span>.head;</span><br><span class="line">    <span class="keyword">while</span> (currentNode.next !== <span class="literal">null</span> &amp;&amp; currentNode.next.element !== value) &#123;</span><br><span class="line">      currentNode = currentNode.next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (currentNode.next === <span class="literal">null</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> currentNode;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 指定元素向后插入</span></span><br><span class="line">  insert(newElement, element) &#123;</span><br><span class="line">    <span class="keyword">const</span> currentNode = <span class="keyword">this</span>.findByValue(element);</span><br><span class="line">    <span class="keyword">if</span> (currentNode === <span class="number">-1</span>) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'未找到插入位置'</span>);</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">const</span> newNode = <span class="keyword">new</span> Node(newElement);</span><br><span class="line">    newNode.next = currentNode.next;</span><br><span class="line">    currentNode.next = newNode;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 根据值删除</span></span><br><span class="line">  remove(value) &#123;</span><br><span class="line">    <span class="keyword">const</span> desNode = <span class="keyword">this</span>.findByValue(value);</span><br><span class="line">    <span class="keyword">if</span> (desNode === <span class="number">-1</span>) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(‘未找到元素’);</span><br><span class="line">      <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> prevNode = <span class="keyword">this</span>.findPrev(value);</span><br><span class="line">    prevNode.next = desNode.next;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 遍历显示所有节点</span></span><br><span class="line">  display() &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.checkCircle()) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> curr = <span class="keyword">this</span>.head;</span><br><span class="line">    <span class="keyword">while</span> (curr) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(curr.element);</span><br><span class="line">      curr = curr.next;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 尾插法 反转单链表</span></span><br><span class="line">  reverseList() &#123;</span><br><span class="line">    <span class="keyword">const</span> root = <span class="keyword">new</span> Node(<span class="string">'head'</span>);</span><br><span class="line">    <span class="comment">// 第一个元素为head</span></span><br><span class="line">    <span class="keyword">let</span> curr = <span class="keyword">this</span>.head.next;</span><br><span class="line">    <span class="keyword">while</span> (curr !== <span class="literal">null</span>) &#123;</span><br><span class="line">      <span class="keyword">const</span> next = curr.next;</span><br><span class="line">      <span class="comment">// 先切断当前链表, 衔接已反转的部分（root也包含'head'节点，需要跳一格)</span></span><br><span class="line">      curr.next = root.next;</span><br><span class="line">      root.next = curr;</span><br><span class="line">      curr = next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">this</span>.head = root;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 环验证</span></span><br><span class="line">  checkCircle() &#123;</span><br><span class="line">    <span class="keyword">let</span> fast = <span class="keyword">this</span>.head;</span><br><span class="line">    <span class="keyword">let</span> slow = <span class="keyword">this</span>.head;</span><br><span class="line">    <span class="keyword">while</span> (fast !== <span class="literal">null</span> &amp;&amp; fast.next !== <span class="literal">null</span>) &#123;</span><br><span class="line">      fast = fast.next.next;</span><br><span class="line">      slow = slow.next;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (slow === fast) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 删除倒数第k个节点</span></span><br><span class="line">  removeByIndexFromEnd(index) &#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">this</span>.checkCircle()) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">let</span> pos = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">this</span>.reverseList();</span><br><span class="line">    <span class="keyword">let</span> curr = <span class="keyword">this</span>.head.next;</span><br><span class="line">    <span class="keyword">while</span> (curr &amp;&amp; pos &lt; index) &#123;</span><br><span class="line">      curr = curr.next;</span><br><span class="line">      pos++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(!curr) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'无法删除最后一个节点或者该节点不存在'</span>)</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">this</span>.remove(curr.element);</span><br><span class="line">    <span class="keyword">this</span>.reverseList();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Test</span></span><br><span class="line"><span class="keyword">const</span> LList = <span class="keyword">new</span> LinkedList()</span><br><span class="line">LList.insert(‘chen’, ‘head’)</span><br><span class="line">LList.insert(‘curry’, ‘chen’)</span><br><span class="line">LList.insert(‘sang’, ‘head’)</span><br><span class="line">LList.insert(<span class="string">'zhao'</span>, <span class="string">'head'</span>)</span><br><span class="line">LList.display()</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'-------------start reverse------------'</span>)</span><br><span class="line">LList.reverseList()</span><br><span class="line">LList.display()</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'-------------check circle------------'</span>)</span><br><span class="line"><span class="built_in">console</span>.log(LList.checkCircle())</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'-------------remove the one before last ------------'</span>)</span><br><span class="line">LList.removeByIndexFromEnd(<span class="number">2</span>)</span><br><span class="line">LList.display()</span><br></pre></td></tr></table></figure>
 
-      
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
 
         
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh">
-    <link itemprop="mainEntityOfPage" href="https://greygao.github.io/greygao-blog/greygao-blog/2019/11/18/%E3%80%90%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E3%80%91%E5%90%8E%E7%9F%A5%E5%90%8E%E8%A7%89%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%80%EF%BC%89/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/greygao-blog/images/avatar.gif">
-      <meta itemprop="name" content="Grey Gao">
-      <meta itemprop="description" content="">
-    </span>
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/greygao-blog/2019/11/18/%E3%80%90%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E3%80%91%E5%90%8E%E7%9F%A5%E5%90%8E%E8%A7%89%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%80%EF%BC%89/" rel="next" title="【设计模式】后知后觉的面向对象编程（一）">
+                  <i class="fa fa-chevron-left"></i> 【设计模式】后知后觉的面向对象编程（一）
+                </a>
+            </div>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/greygao-blog/2019/11/18/%E3%80%90%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E3%80%91%E5%90%8E%E7%9F%A5%E5%90%8E%E8%A7%89%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%80%EF%BC%89/" class="post-title-link" itemprop="url">【设计模式】后知后觉的面向对象编程（一）</a>
-        </h1>
+            <span class="post-nav-divider"></span>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2019-11-18 22:26:33 / Modified: 22:50:54" itemprop="dateCreated datePublished" datetime="2019-11-18T22:26:33+08:00">2019-11-18</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="【设计模式】后知后觉的面向对象编程（一）"><a href="#【设计模式】后知后觉的面向对象编程（一）" class="headerlink" title="【设计模式】后知后觉的面向对象编程（一）"></a>【设计模式】后知后觉的面向对象编程（一）</h1><p>作为一个从JavaScript入门编程世界的人来说，所谓“面向对象”这个概念，就仿佛从来没真的存在过，它就像那传说中的大侠，江湖处处都有它的传说，却始终没曾有幸得识真面目。<br>然鹅，<br>路走多了就会想跑，摔倒了就会想怎么跳。</p>
-<p>在自己的工作不再是简单的页面，而逐步进入越来越复杂的模块设计，尤其是Hybrid开发之后，误打误撞的，某些轮廓慢慢的浮现出来，究竟什么是类，什么是面向“对象”，在经历了一轮iOS（Objective-C）和Android（Java）的洗礼下，也逐渐开始明晰起来。<br>那种定义一个模型，并为其从简单到复杂，私有到公有，继承到多态的感觉，真好啊。</p>
-<p>它似乎不再是机械式的通过一系列指令在与机器进行交谈，而是变得有轮廓，有毛发，有自己的呼吸的自生命体（只取决于设计人能力的强大与否）。</p>
-<p>扯了这么多玄学，下面还是进入自我总结吧。</p>
-<h3 id="什么是面向对象编程"><a href="#什么是面向对象编程" class="headerlink" title="什么是面向对象编程"></a>什么是面向对象编程</h3><ol>
-<li>以<code>类</code>或<code>对象</code>作为组织代码的基本单元</li>
-<li>将<code>封装</code>、<code>抽象</code>、<code>继承</code>、<code>多态</code>四个特性作为代码设计和实现的基石</li>
-</ol>
-<h3 id="什么是面向对象分析和面向对象设计"><a href="#什么是面向对象分析和面向对象设计" class="headerlink" title="什么是面向对象分析和面向对象设计"></a>什么是面向对象分析和面向对象设计</h3><p>面向对象开发需要经历的三个阶段：面向对象分析（OOA）、面向对象设计（OOD）、面向对象编程（OOP）</p>
-<ol>
-<li>始终围绕着类或对象来做需求设计、分析；</li>
-<li>面向对象分析需要搞清楚要做什么；</li>
-<li>面向对象设计来搞清楚怎么做；</li>
-<li>而面向对象编程则是将需求和设计翻译成为代码的过程；</li>
-</ol>
-<p>#blog</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
+            <div class="post-nav-prev post-nav-item">
+            </div>
+          </div>
       </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh">
-    <link itemprop="mainEntityOfPage" href="https://greygao.github.io/greygao-blog/greygao-blog/2019/11/10/%E3%80%90%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E3%80%91%E8%B0%88%E4%BB%A3%E7%A0%81%E8%B4%A8%E9%87%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/greygao-blog/images/avatar.gif">
-      <meta itemprop="name" content="Grey Gao">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/greygao-blog/2019/11/10/%E3%80%90%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E3%80%91%E8%B0%88%E4%BB%A3%E7%A0%81%E8%B4%A8%E9%87%8F/" class="post-title-link" itemprop="url">【设计模式】谈代码质量</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2019-11-10 21:27:41 / Modified: 22:28:32" itemprop="dateCreated datePublished" datetime="2019-11-10T21:27:41+08:00">2019-11-10</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
     
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="【设计模式】谈代码质量"><a href="#【设计模式】谈代码质量" class="headerlink" title="【设计模式】谈代码质量"></a>【设计模式】谈代码质量</h1><p>在过去的一两年开发中，也算经历了比较低阶的各种烂代码：<br>    - 复制、粘贴每页抄一遍的<br>    - 变量名字意味不明，随心所欲的<br>    - 过度封装、相互引用到最后妈不认的<br>    - 从来不考虑安全边界的<br>那些为烂代码痛苦挣扎的日子也就按下不表了，站在当前的界点，能做些什么才能改变这些现状呢，诚然对一个项目来说，工程师的技术能力的重要性毋庸置疑，但往往也会事与愿违，“好刀却不一定有出鞘的机会”，所以除却工程师个人能力的部分，更为科学的代码管理、无关于人的制度层面，也是无可忽视的一部分。</p>
-<h2 id="代码的高质量的标准"><a href="#代码的高质量的标准" class="headerlink" title="代码的高质量的标准"></a>代码的高质量的标准</h2><h3 id="1-可读性-readability"><a href="#1-可读性-readability" class="headerlink" title="1. 可读性(readability)"></a>1. 可读性(readability)</h3><p>这里我想将可读性放在第一位。一段无法阅读的代码，即便写的再优秀，随着时间的新陈代谢，也只会腐烂在那里，无人问津。<br>如果一段代码无法被阅读者很好的理解，那么接下来的一切维护、优化、扩展都如无源之水，随时干枯、崩坏，进而制造出无数的新的bug，最终废弃。</p>
-<p>如何评价可读性呢，我的标准：</p>
-<ol>
-<li>是否有良好的编码规范（JS中可以使用ESlint进行规范）</li>
-<li>命名是否具有良好的语意性</li>
-<li>注释是否详细（是为读者写的，而不只是为自己应付差事）</li>
-<li>是否简洁易懂（不过度封装、不炫技、实用主义至上）</li>
-</ol>
-<h3 id="2-可维护性-maintainability"><a href="#2-可维护性-maintainability" class="headerlink" title="2. 可维护性(maintainability)"></a>2. 可维护性(maintainability)</h3><p>可维护性其实是一个比较综合的概念，代码的可读性好、简洁、注释完备，维护人员很容易就能定位到问题或扩展新功能，就意味着可维护性好。</p>
-<h3 id="3-可扩展性-extensibility"><a href="#3-可扩展性-extensibility" class="headerlink" title="3. 可扩展性 (extensibility)"></a>3. 可扩展性 (extensibility)</h3><p>在新手程序员经历了无数次对自己那套烂代码重构之后，他们终于开始意识到什么叫<code>扩展性</code>，不再是为每一样需求都定制一个完全新的轮子和零件，而是开始逐渐去建立一些非常基础的模块组件，然后预留未来可预见范围内会加入功能的插槽，已应对后续大部分建立在原代码基础之上的需求。</p>
-<h3 id="4-简洁性-simplicity"><a href="#4-简洁性-simplicity" class="headerlink" title="4. 简洁性(simplicity)"></a>4. 简洁性(simplicity)</h3><p>Simple and clean，是我的原则。<br>很多程序员似乎往往在带着一种蜜汁优越感在进行coding这份工作，仿佛耍着漂亮的花式，全场观众的眼球就会全部停留在自己身上，最后写出那种过半个月自己都看不懂的东西。<br>对不起，真的很好笑。</p>
-<p>简单有效的解决问题，让后来人一眼就能明白你的思路，让一切复杂的问题都能分解成无数段最简单的语句，才是真的功力见深。</p>
-<h3 id="5-可复用性-reusability-、可测试性-testability"><a href="#5-可复用性-reusability-、可测试性-testability" class="headerlink" title="5. 可复用性(reusability)、可测试性(testability)"></a>5. 可复用性(reusability)、可测试性(testability)</h3><p>相较于上面4个标准来说，我认为这是一个优秀程序员进阶需要开始关注的问题。<br>复用性好意味着代码更简洁，可维护性也大幅增加，尤其是在日常的增删改查业务中，如果不注意复用性，往往后果就是大量的copy，paste代码。</p>
-<p>而可测试性，就前端来说，还是蛮难的一点，毕竟前端的测试成本空前的高。<br>但经过自己在leetcode一段时间的练习后，其实深刻感受到了测试的重要性：<br>    - 边界检查（能够大幅提升代码的稳健性）<br>    - 回归检查（能够在每日日常的更新中，保证代码的运行不会出现异常问题）</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>在应对日常的工作中，把提高代码的可阅读性作为一切一切的基础，是自己、也是对于团队的最基本要求，将它变成基本的制度。<br>在这之上，保持代码的简洁，再逐步拓展代码的扩展性、复用性，这样得到的代码，对于团队而言，就不再会存在无法接手、阅读困难、改不动这些问题，而对个人而言，在长期的保持注意这些问题的坚持下，也会得到更好的代码质量。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh">
-    <link itemprop="mainEntityOfPage" href="https://greygao.github.io/greygao-blog/greygao-blog/2019/11/10/%E5%BC%80%E7%AF%87%E8%AF%8D/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/greygao-blog/images/avatar.gif">
-      <meta itemprop="name" content="Grey Gao">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/greygao-blog/2019/11/10/%E5%BC%80%E7%AF%87%E8%AF%8D/" class="post-title-link" itemprop="url">开篇词</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2019-11-10 20:56:40 / Modified: 22:28:25" itemprop="dateCreated datePublished" datetime="2019-11-10T20:56:40+08:00">2019-11-10</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="开篇词"><a href="#开篇词" class="headerlink" title="开篇词"></a>开篇词</h1><p>接下来一段时间的重点：</p>
-<ol>
-<li>JavaScript基础重读、精读</li>
-<li>React框架的精研</li>
-<li>设计模式的学习、了解</li>
-</ol>
-<p>贵精不贵多，且这三个主题也已经足够大，之所以写这个头也是为了后来不要忘记最初定下的这一阶段目标：把小事做精，深刻的理解里，才有真相。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
   </article>
   
   
   
 
   </div>
-
-  
-
 
 
           </div>
@@ -481,6 +282,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#【数据结构】链表在JS中的实现"><span class="nav-number">1.</span> <span class="nav-text">【数据结构】链表在JS中的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#目标"><span class="nav-number">1.1.</span> <span class="nav-text">目标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现"><span class="nav-number">1.2.</span> <span class="nav-text">实现</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
