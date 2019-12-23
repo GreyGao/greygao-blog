@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/greygao-blog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/greygao-blog/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/greygao-blog/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/greygao-blog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/greygao-blog/css/main.css">
+
+
+<link rel="stylesheet" href="/greygao-blog/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/greygao-blog/',
+    scheme: 'Muse',
+    version: '7.4.2',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="【设计模式】后知后觉的面向对象编程（二） 面向对象编程语言的四大特性：封装、抽象、继承、多态文章部分内容摘录自《设计模式之美》    封装（Encapsulation）封装也叫作信息隐藏或者数据访问保护。类通过暴露有限的访问接口，授权外部仅能通过类提供的方式（或者叫函数）来访问内部信息或者数据。对于封装这个特性，我们需要编程语言本身提供一定的语法机制来支持。这个语法机制就是访问权限控制。例子中的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【设计模式】后知后觉的面向对象编程（二）">
+<meta property="og:url" content="https:&#x2F;&#x2F;greygao.github.io&#x2F;greygao-blog&#x2F;2019&#x2F;12&#x2F;23&#x2F;%E3%80%90%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E3%80%91%E5%90%8E%E7%9F%A5%E5%90%8E%E8%A7%89%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%EF%BC%88%E4%BA%8C%EF%BC%89&#x2F;index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="【设计模式】后知后觉的面向对象编程（二） 面向对象编程语言的四大特性：封装、抽象、继承、多态文章部分内容摘录自《设计模式之美》    封装（Encapsulation）封装也叫作信息隐藏或者数据访问保护。类通过暴露有限的访问接口，授权外部仅能通过类提供的方式（或者叫函数）来访问内部信息或者数据。对于封装这个特性，我们需要编程语言本身提供一定的语法机制来支持。这个语法机制就是访问权限控制。例子中的">
+<meta property="og:locale" content="zh">
+<meta property="og:updated_time" content="2019-12-23T11:53:33.423Z">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://greygao.github.io/greygao-blog/2019/12/23/%E3%80%90%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E3%80%91%E5%90%8E%E7%9F%A5%E5%90%8E%E8%A7%89%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%EF%BC%88%E4%BA%8C%EF%BC%89/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>【设计模式】后知后觉的面向对象编程（二） | Hexo</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/greygao-blog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/greygao-blog/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/greygao-blog/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh">
+    <link itemprop="mainEntityOfPage" href="https://greygao.github.io/greygao-blog/greygao-blog/2019/12/23/%E3%80%90%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E3%80%91%E5%90%8E%E7%9F%A5%E5%90%8E%E8%A7%89%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%EF%BC%88%E4%BA%8C%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/greygao-blog/images/avatar.gif">
+      <meta itemprop="name" content="Grey Gao">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【设计模式】后知后觉的面向对象编程（二）
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-12-23 19:07:04 / Modified: 19:53:33" itemprop="dateCreated datePublished" datetime="2019-12-23T19:07:04+08:00">2019-12-23</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="【设计模式】后知后觉的面向对象编程（二）"><a href="#【设计模式】后知后觉的面向对象编程（二）" class="headerlink" title="【设计模式】后知后觉的面向对象编程（二）"></a>【设计模式】后知后觉的面向对象编程（二）</h1><blockquote>
+<p>面向对象编程语言的四大特性：封装、抽象、继承、多态<br>文章部分内容摘录自《设计模式之美》  </p>
+</blockquote>
+<h2 id="封装（Encapsulation）"><a href="#封装（Encapsulation）" class="headerlink" title="封装（Encapsulation）"></a>封装（Encapsulation）</h2><p>封装也叫作信息隐藏或者数据访问保护。类通过暴露有限的访问接口，授权外部仅能通过类提供的方式（或者叫函数）来访问内部信息或者数据。<br>对于封装这个特性，我们需要编程语言本身提供一定的语法机制来支持。这个语法机制就是访问权限控制。例子中的 private、public 等关键字就是 Java 语言中的访问权限控制语法。private 关键字修饰的属性只能类本身访问，可以保护其不被类之外的代码直接访问。</p>
+<p><strong>封装的意义是什么？它能解决什么编程问题？</strong></p>
+<p>如果我们对类中属性的访问不做限制，那任何代码都可以访问、修改类中的属性，虽然这样看起来更加灵活，但从另一方面来说，过度灵活也意味着不可控，属性可以随意被以各种奇葩的方式修改，而且修改逻辑可能散落在代码中的各个角落，势必影响代码的可读性、可维护性。</p>
+<p>除此之外，<strong>类仅仅通过有限的方法暴露必要的操作，也能提高类的易用性</strong>。如果我们把类属性都暴露给类的调用者，调用者想要正确地操作这些属性，就势必要对业务细节有足够的了解。而这对于调用者来说也是一种负担。相反，如果我们将属性封装起来，暴露少许的几个必要的方法给调用者使用，调用者就不需要了解太多背后的业务细节，用错的概率就减少很多。</p>
+<h2 id="抽象（Abstraction）"><a href="#抽象（Abstraction）" class="headerlink" title="抽象（Abstraction）"></a>抽象（Abstraction）</h2><p>封装主要负责的是如何隐藏信息、保护数据，而抽象负责的是如何隐藏方法的具体实现，让调用者只需要关心方法提供了哪些功能，并不需要知道这些功能是如何实现的。</p>
+<p><strong>抽象的意义是什么？它能解决什么编程问题？</strong></p>
+<p>如果上升一个思考层面的话，抽象及其前面讲到的封装都是人类处理复杂性的有效手段。在面对复杂系统的时候，人脑能承受的信息复杂程度是有限的，所以我们必须忽略掉一些非关键性的实现细节。而抽象作为一种只关注功能点不关注实现的设计思路，正好帮我们的大脑过滤掉许多非必要的信息。</p>
+<h2 id="继承（Inheritance）"><a href="#继承（Inheritance）" class="headerlink" title="继承（Inheritance）"></a>继承（Inheritance）</h2><p>继承是用来表示类之间的 is-a 关系，比如猫是一种哺乳动物。从继承关系上来讲，继承可以分为两种模式，单继承和多继承。单继承表示一个子类只继承一个父类，多继承表示一个子类可以继承多个父类，比如猫既是哺乳动物，又是爬行动物。</p>
+<p><strong>继承存在的意义是什么？它能解决什么编程问题？</strong></p>
+<p>继承最大的一个好处就是代码复用。假如两个类有一些相同的属性和方法，我们就可以将这些相同的部分，抽取到父类中，让两个子类继承父类。这样，两个子类就可以重用父类中的代码，避免代码重复写多遍。不过，这一点也并不是继承所独有的，我们也可以通过其他方式来解决这个代码复用的问题，比如利用组合关系而不是继承关系。</p>
+<p>不过，过度使用继承，继承层次过深过复杂，就会导致代码可读性、可维护性变差。为了了解一个类的功能，我们不仅需要查看这个类的代码，还需要按照继承关系一层一层地往上查看“父类、父类的父类……”的代码。还有，子类和父类高度耦合，修改父类的代码，会直接影响到子类。</p>
+<h2 id="多态（Polymorphism）"><a href="#多态（Polymorphism）" class="headerlink" title="多态（Polymorphism）"></a>多态（Polymorphism）</h2><p>多态是指，子类可以替换父类，在实际的代码运行过程中，调用子类的方法实现。</p>
+<h3 id="接口类多态性"><a href="#接口类多态性" class="headerlink" title="接口类多态性"></a>接口类多态性</h3><p>定义一个共用的接口类，当传递不同的实现类时，支持动态调用不同的接口；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Iterator</span> </span>&#123;</span><br><span class="line">  <span class="function">String <span class="title">hasNext</span><span class="params">()</span></span>;</span><br><span class="line">  <span class="function">String <span class="title">next</span><span class="params">()</span></span>;</span><br><span class="line">  <span class="function">String <span class="title">remove</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Array</span> <span class="keyword">implements</span> <span class="title">Iterator</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> String[] data;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">hasNext</span><span class="params">()</span> </span>&#123; ... &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">next</span><span class="params">()</span> </span>&#123; ... &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">remove</span><span class="params">()</span> </span>&#123; ... &#125;</span><br><span class="line">  <span class="comment">//...省略其他方法...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LinkedList</span> <span class="keyword">implements</span> <span class="title">Iterator</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> LinkedListNode head;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">hasNext</span><span class="params">()</span> </span>&#123; ... &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">next</span><span class="params">()</span> </span>&#123; ... &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">remove</span><span class="params">()</span> </span>&#123; ... &#125;</span><br><span class="line">  <span class="comment">//...省略其他方法... </span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">(Iterator iterator)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (iterator.hasNext()) &#123;</span><br><span class="line">      System.out.println(iterator.next());</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Iterator arrayIterator = <span class="keyword">new</span> Array();</span><br><span class="line">    print(arrayIterator);</span><br><span class="line">    </span><br><span class="line">    Iterator linkedListIterator = <span class="keyword">new</span> LinkedList();</span><br><span class="line">    print(linkedListIterator);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="duck-typing多态性"><a href="#duck-typing多态性" class="headerlink" title="duck-typing多态性"></a>duck-typing多态性</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Logger</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">record</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(“I write a log into file.”)</span><br><span class="line">        </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DB</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">record</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(“I insert data into db. ”)</span><br><span class="line">        </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">(recorder)</span>:</span></span><br><span class="line">    recorder.record()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">demo</span><span class="params">()</span>:</span></span><br><span class="line">    logger = Logger()</span><br><span class="line">    db = DB()</span><br><span class="line">    test(logger)</span><br><span class="line">    test(db)</span><br></pre></td></tr></table></figure>
+<p>Duck-typing 实现多态的方式非常灵活。Logger 和 DB 两个类没有任何关系，既不是继承关系，也不是接口和实现的关系，但是只要它们都有定义了 record() 方法，就可以被传递到 test() 方法中，在实际运行的时候，执行对应的 record() 方法。<br>只要两个类具有相同的方法，就可以实现多态，并不要求两个类之间有任何关系，这就是所谓的 duck-typing，是一些动态语言所特有的语法机制。</p>
+<p><strong>多态特性存在的意义是什么？它能解决什么编程问题？</strong></p>
+<p>多态特性能提高代码的可扩展性和复用性。如果我们不使用多态特性，我们就无法将不同的集合类型（Array、LinkedList）传递给相同的函数（print(Iterator iterator) 函数）。</p>
+<p>#blog</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/greygao-blog/2019/11/26/%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E4%BD%BF%E7%94%A8%E6%95%B0%E7%BB%84%E3%80%81%E9%93%BE%E8%A1%A8%E5%9C%A8JS%E4%B8%AD%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E9%98%9F%E5%88%97/" rel="next" title="【数据结构】使用数组、链表在JS中实现一个队列">
+                  <i class="fa fa-chevron-left"></i> 【数据结构】使用数组、链表在JS中实现一个队列
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#【设计模式】后知后觉的面向对象编程（二）"><span class="nav-number">1.</span> <span class="nav-text">【设计模式】后知后觉的面向对象编程（二）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#封装（Encapsulation）"><span class="nav-number">1.1.</span> <span class="nav-text">封装（Encapsulation）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#抽象（Abstraction）"><span class="nav-number">1.2.</span> <span class="nav-text">抽象（Abstraction）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#继承（Inheritance）"><span class="nav-number">1.3.</span> <span class="nav-text">继承（Inheritance）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多态（Polymorphism）"><span class="nav-number">1.4.</span> <span class="nav-text">多态（Polymorphism）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#接口类多态性"><span class="nav-number">1.4.1.</span> <span class="nav-text">接口类多态性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#duck-typing多态性"><span class="nav-number">1.4.2.</span> <span class="nav-text">duck-typing多态性</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="Grey Gao"
+    src="/greygao-blog/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Grey Gao</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/greygao-blog/archives/">
+        
+          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Grey Gao</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.4.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/greygao-blog/lib/anime.min.js"></script>
+  <script src="/greygao-blog/lib/velocity/velocity.min.js"></script>
+  <script src="/greygao-blog/lib/velocity/velocity.ui.min.js"></script>
+<script src="/greygao-blog/js/utils.js"></script><script src="/greygao-blog/js/motion.js"></script>
+<script src="/greygao-blog/js/schemes/muse.js"></script>
+<script src="/greygao-blog/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
